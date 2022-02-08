@@ -1,0 +1,12 @@
+{
+  "type": "commonjs",
+  "name": "keylessworldusa",
+  "version": "1.0.0",
+  "description": "API Rest for products Woocommerce",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "door",
+  "license": "ISC"
+}
