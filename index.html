@@ -23,19 +23,6 @@
                 class="input_searcher"
               >
                 <option value="" selected disabled hidden>Brand</option>
-
-                <option value="">1</option>
-                <option value="">2</option>
-                <option value="">3</option>
-                <option value="">4</option>
-                <option value="">1</option>
-                <option value="">2</option>
-                <option value="">3</option>
-                <option value="">4</option>
-                <option value="">1</option>
-                <option value="">2</option>
-                <option value="">3</option>
-                <option value="">4</option>
               </select>
             </div>
             <div class="select-wrapper">
@@ -44,13 +31,9 @@
                 id="searcher_model"
                 aria-label="Model"
                 class="input_searcher"
+                disabled
               >
                 <option value="" selected disabled hidden>Model</option>
-
-                <option value="">1</option>
-                <option value="">2</option>
-                <option value="">3</option>
-                <option value="">4</option>
               </select>
             </div>
             <div class="select-wrapper">
@@ -59,13 +42,9 @@
                 id="searcher_year"
                 aria-label="Year"
                 class="input_searcher"
+                disabled
               >
                 <option value="" selected disabled hidden>Year</option>
-
-                <option value="">1</option>
-                <option value="">2</option>
-                <option value="">3</option>
-                <option value="">4</option>
               </select>
             </div>
 
@@ -152,5 +131,25 @@
         </div>
       </div>
     </div>
+
+    <template id="card_product">
+      <div class="card_product">
+        <img
+          src="npia.png"
+          alt="No product image available"
+          class="card_product-image"
+        />
+        <a href="" type="button" class="card_product-buy" rel="noopener"
+          >ADD TO CART</a
+        >
+        <div class="card_product-body">
+          <p class="product_name">PRODUCTO B</p>
+          <p class="product_price">$9.99</p>
+
+          <span class="product_sku">SKU:</span>
+        </div>
+      </div>
+    </template>
+    <script src="/app.js"></script>
   </body>
 </html>
