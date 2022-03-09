@@ -10,11 +10,16 @@ html {
   box-sizing: inherit;
 }
 
+.wform * {
+  box-sizing: border-box;
+}
+
 .wform {
   align-items: center;
   display: flex;
   justify-content: center;
-  width: 100%;
+  width: 95%;
+  margin: 0 auto;
 }
 
 .wform_child {
@@ -42,6 +47,10 @@ html {
   width: 100%;
   max-width: fit-content;
   font-weight: 600;
+}
+
+.wform:nth-child(2) .wform_child {
+  padding: 25px 0;
 }
 
 #form_searcher {
@@ -97,12 +106,22 @@ html {
   pointer-events: none;
 }
 
-.card_product {
+.feed_products {
   width: 100%;
-  max-width: 320px;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.card_product {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 280px;
   border-radius: 8px;
   overflow: hidden;
-  /* box-shadow: 0px 8px 20px rgb(0 0 0 / 10%); */
+  box-shadow: 0px 8px 15px rgb(0 0 0 / 25%);
 }
 
 .card_product-image {
@@ -111,22 +130,30 @@ html {
 }
 
 .card_product-buy {
-  display: block;
-  font-size: 12px;
-  padding: 12px 20px;
-  border: none;
-  background-color: #8cc63f;
-  color: #fff;
-  text-transform: uppercase;
-  text-decoration: none;
-  font-weight: 800;
-  text-align: center;
+  border: 4px solid transparent;
+  background-color: #006837;
   border-radius: 4px;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 800;
+  margin: 1rem;
+  padding: 12px 20px;
+  text-align: center;
+  text-decoration: none;
+  text-transform: uppercase;
+  width: fit-content;
+  transition: 0.2s color ease-in-out, 0.5s background-color ease-in-out,
+    0s border ease-in-out;
+}
+
+.card_product-buy:hover {
+  border: 4px solid #006837;
+  background-color: transparent;
+  color: #006837;
 }
 
 .card_product-body {
   padding: 18px;
-  background-color: #f1f1f1;
 }
 
 .card_product-body .product_name {
@@ -142,22 +169,13 @@ html {
   margin: 0 0 0 0;
 }
 
-.card_product-body .product_sku {
+.card_product-body .product_categorie {
   display: block;
   width: 100%;
-  text-align: right;
   font-weight: 300;
-  font-size: 12px;
-  color: #000;
+  font-size: 14px;
+  color: #7f7f7f;
   margin: 20px 0 0 0;
-}
-
-.feed_products {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 20px;
 }
 
 @media screen and (max-width: 950px) {
@@ -179,6 +197,7 @@ html {
   position: relative;
   width: 80px;
   height: 15px;
+  margin: 0 auto;
 }
 .lds-ellipsis div {
   position: absolute;

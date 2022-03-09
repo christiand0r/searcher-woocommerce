@@ -1,6 +1,6 @@
-const URL = null;
-const CK = null;
-const CS = null;
+const URL = "https://keylessworldusa.com/wp-json/wc/v3/";
+const CK = "ck_675835568c408d902604d25d05b940f8ad0ea136";
+const CS = "cs_687836aeaa166718f6a61319f59843c704569e5b";
 
 const loaderHTML = `
   <div class="lds-ellipsis">
@@ -11,7 +11,41 @@ const loaderHTML = `
   </div>
 `;
 
+const filterBrand = (brand) => {
+  const brandNone = [
+    "American Motors Corporation",
+    "Blades",
+    "Flip Shells",
+    "Key Shells",
+    "Keydiy",
+    "Keyless Remotes",
+    "Lishi Tools",
+    "Lock Ingnitions",
+    "Locksmith Tools",
+    "Remote Head Key",
+    "Rubber Pad",
+    "Smart Key",
+    "Strattec",
+    "Transponder Chip",
+    "Transponder Keys",
+    "Uncategorized",
+    "Unlocking Service",
+    "Xhorse",
+    "Remote Head and Flip Key",
+  ];
+
+  return brandNone.includes(brand);
+};
+
+//Esperar carga del DOM
+document.addEventListener("DOMContentLoaded", () => {
+  console.log("Ready");
+  initialStateForm();
+});
+
 async function initialStateForm() {
+  console.log("Start");
+
   //Carga Inicial del Formulario
   const $form = document.getElementById("form_searcher");
   const $button = document.querySelector("#form_searcher button[type=submit]");
@@ -24,8 +58,10 @@ async function initialStateForm() {
     consumer_secret: CS,
   });
 
+  const filteredBrands = brands.filter((brand) => !filterBrand(brand.name));
+
   //Insertamos todas las marcas
-  insertOptions($form["searcher_brand"], brands);
+  insertOptions($form["searcher_brand"], filteredBrands);
 
   document.addEventListener("change", async (e) => {
     if (e.target === $form["searcher_brand"]) {
@@ -111,7 +147,7 @@ async function initialStateForm() {
     const npia =
       "https://keylessworldusa.com/wp-content/uploads/2022/03/npia.png";
 
-    res.forEach(({ id, images, name, permalink, price, sku }) => {
+    res.forEach(({ id, images, name, permalink, price, categories }) => {
       let cloneTemplate = $template.cloneNode(true);
 
       cloneTemplate.querySelector(".card_product").dataset.pid = id;
@@ -125,7 +161,14 @@ async function initialStateForm() {
       //Agregar datos
       cloneTemplate.querySelector(".product_name").innerHTML = name;
       cloneTemplate.querySelector(".product_price").innerHTML = `$${price}`;
-      cloneTemplate.querySelector(".product_sku").innerHTML = `SKU: ${sku}`;
+
+      //Categoria del producto
+      const category = categories.filter(
+        (el) => el.id === Number(e.target["searcher_brand"].value)
+      );
+
+      cloneTemplate.querySelector(".product_categories").innerHTML =
+        category[0].name;
 
       //Agregar link
       cloneTemplate.querySelector(".card_product-buy").href = permalink;
@@ -208,7 +251,7 @@ const insertOptions = (select, options) => {
     $option.value = opt.id || opt;
 
     //Agregamos el contenido
-    $option.textContent = opt.name || opt;
+    $option.innerHTML = opt.name || opt;
 
     //Agregamos al fragmento
     fragment.append($option);
@@ -217,5 +260,3 @@ const insertOptions = (select, options) => {
   select.innerHTML = "";
   select.append($placeholder, fragment);
 };
-
-initialStateForm();
