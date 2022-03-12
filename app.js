@@ -1,6 +1,6 @@
 const URL = "https://keylessworldusa.com/wp-json/wc/v3/";
-const CK = "ck_675835568c408d902604d25d05b940f8ad0ea136";
-const CS = "cs_687836aeaa166718f6a61319f59843c704569e5b";
+const CK = "ck_****************************************";
+const CS = "cs_****************************************";
 
 const loaderHTML = `
   <div class="lds-ellipsis">
