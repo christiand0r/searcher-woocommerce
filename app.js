@@ -1,4 +1,4 @@
-const URL = "https://keylessworldusa.com/wp-json/wc/v3/";
+const URL = "https://xxxxx-yyyyy-zzzzz/wp-json/wc/v3/";
 const CK = "ck_****************************************";
 const CS = "cs_****************************************";
 
@@ -11,41 +11,12 @@ const loaderHTML = `
   </div>
 `;
 
-const filterBrand = (brand) => {
-  const brandNone = [
-    "American Motors Corporation",
-    "Blades",
-    "Flip Shells",
-    "Key Shells",
-    "Keydiy",
-    "Keyless Remotes",
-    "Lishi Tools",
-    "Lock Ingnitions",
-    "Locksmith Tools",
-    "Remote Head Key",
-    "Rubber Pad",
-    "Smart Key",
-    "Strattec",
-    "Transponder Chip",
-    "Transponder Keys",
-    "Uncategorized",
-    "Unlocking Service",
-    "Xhorse",
-    "Remote Head and Flip Key",
-  ];
-
-  return brandNone.includes(brand);
-};
-
 //Esperar carga del DOM
 document.addEventListener("DOMContentLoaded", () => {
-  console.log("Ready");
   initialStateForm();
 });
 
 async function initialStateForm() {
-  console.log("Start");
-
   //Carga Inicial del Formulario
   const $form = document.getElementById("form_searcher");
   const $button = document.querySelector("#form_searcher button[type=submit]");
@@ -58,10 +29,8 @@ async function initialStateForm() {
     consumer_secret: CS,
   });
 
-  const filteredBrands = brands.filter((brand) => !filterBrand(brand.name));
-
   //Insertamos todas las marcas
-  insertOptions($form["searcher_brand"], filteredBrands);
+  insertOptions($form["searcher_brand"], brands);
 
   document.addEventListener("change", async (e) => {
     if (e.target === $form["searcher_brand"]) {
@@ -92,27 +61,6 @@ async function initialStateForm() {
       });
 
       $button.innerHTML = "SEARCH";
-
-      let tagsYears = [];
-      products.map(({ tags }) => (tagsYears = [...tags, ...tagsYears]));
-
-      //Obtenemos unicamente name y id
-      //Filtramos aquello que no sean años
-      //Transformamos a texto
-
-      const years = tagsYears
-        .map(({ name, id }) => {
-          return { name, id };
-        })
-        .filter((el) => !isNaN(el.name))
-        .map(({ name, id }) => `{"name": ${name}, "id": ${id}}`);
-
-      //Usamos Set para eliminar los duplicados
-      //Parseamos para obtener los objetos
-      //Ordenamos de menor a mayor
-      const yearsSorted = Array.from(new Set(years))
-        .map((el) => JSON.parse(el))
-        .sort((a, b) => a.name - b.name);
 
       $form["searcher_year"].disabled = false;
       insertOptions($form["searcher_year"], yearsSorted);
@@ -145,7 +93,7 @@ async function initialStateForm() {
 
     //Imagen si la imagen no está disponible
     const npia =
-      "https://keylessworldusa.com/wp-content/uploads/2022/03/npia.png";
+      "https://xxxxx-yyyyy-zzzzz/wp-content/uploads/year/month/npia.png";
 
     res.forEach(({ id, images, name, permalink, price, categories }) => {
       let cloneTemplate = $template.cloneNode(true);
